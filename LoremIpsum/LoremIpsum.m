@@ -102,6 +102,19 @@ NSUInteger LIRandomUnsignedInteger(NSUInteger lowerBound, NSUInteger upperBound)
     return domains;
 }
 
++ (NSArray *)images
+{
+    static NSArray *images = nil;
+    if (!images) {
+        images = @[@"http://ww3.sinaimg.cn/%@/8e88b0c1gw1e9lpr0nly5j20pf0gygo6.jpg", @"http://ww3.sinaimg.cn/%@/8e88b0c1gw1e9lpr0nly5j20pf0gygo6.jpg", @"http://ww4.sinaimg.cn/%@/8e88b0c1gw1e9lpr1d0vyj20pf0gytcj.jpg", @"http://ww3.sinaimg.cn/%@/8e88b0c1gw1e9lpr1xydcj20gy0o9q6s.jpg", @"http://ww2.sinaimg.cn/%@/8e88b0c1gw1e9lpr2n1jjj20gy0o9tcc.jpg", @"http://ww2.sinaimg.cn/%@/8e88b0c1gw1e9lpr39ht9j20gy0o6q74.jpg", @"http://ww3.sinaimg.cn/%@/8e88b0c1gw1e9lpr3xvtlj20gy0obadv.jpg", @"http://ww4.sinaimg.cn/%@/8e88b0c1gw1e9lpr4nndfj20gy0o9q6i.jpg", @"http://ww3.sinaimg.cn/%@/8e88b0c1gw1e9lpr57tn9j20gy0obn0f.jpg"];
+    }
+    return images;
+}
+
++ (NSString *)image {
+    return [[self images] objectAtIndex:arc4random_uniform([self images].count)];
+}
+
 #pragma mark - Texts
 
 + (NSString *)word
@@ -255,6 +268,24 @@ NSUInteger LIRandomUnsignedInteger(NSUInteger lowerBound, NSUInteger upperBound)
 
         case LIPlaceholderImageServicePlaceKitten: {
             URLString = [NSString stringWithFormat:@"http://placekitten.com/%zd/%zd/", width, height];
+            break;
+        }
+            
+        
+        case LIPlaceholderImageServiceSinaThumbnail: {
+            URLString = [NSString stringWithFormat:[self image], @"thumbnail"];
+            break;
+        }
+        case LIPlaceholderImageServiceSinaSmall: {
+            URLString = [NSString stringWithFormat:[self image], @"small"];
+            break;
+        }
+        case LIPlaceholderImageServiceSinaMiddle: {
+            URLString = [NSString stringWithFormat:[self image], @"bmiddle"];
+            break;
+        }
+        case LIPlaceholderImageServiceSinaLarge: {
+            URLString = [NSString stringWithFormat:[self image], @"large"];
             break;
         }
     }
